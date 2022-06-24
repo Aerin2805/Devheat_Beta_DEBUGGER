@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Billing try</title>
+    <style>
+.wrap{
+  color: #000;
+}
+
+
+td,th { text-align: center; }
+
+@-webkit-keyframes animatetop {
+from {top:-300px; opacity:0} 
+to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+from {top:-300px; opacity:0}
+to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+padding-top: 1.1%;
+padding-bottom: 1.1%;
+color: rgb(0, 0, 0);
+float: right;
+font-size: 28px;
+font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+color: #000;
+text-decoration: none;
+cursor: pointer;
+}
+
+.modal-header {
+padding-top: 1.1%;
+padding-bottom: 1.1%;
+font-size: 120%;
+background-color: #c3e13d96;
+color: rgb(0, 0, 0);
+}
+
+.modal-body {
+    padding: 2px 5px;
+    color: #000;
+}
+
+.modal-footer {
+padding: 2px 16px;
+background-color: #c3e13d96;
+color: black;
+}
+
+.centertext {
+  padding: 10px 0;
+  border: 3px solid black;
+}
+
+#logo-img{
+  width:80px;
+  margin: 10px 15px 10px 0;
+  float: left;
+}
+
+  body {
+    font: 20px Montserrat, sans-serif;
+    line-height: 1.8;
+    color: #f5f6f7;
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+  .bg-1 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-top: 40px; 
+    background-image:linear-gradient(to right,#12836c,#2ce0bc,#12836c); /* Green */
+    color: #000000;
+  }
+  .bg-2 { 
+    background-image: linear-gradient(to right,rgb(30, 30, 222),rgb(130, 130, 235),rgb(130, 130, 235),rgb(30, 30, 222)); /* Dark Blue */
+    color: #000000;
+    font-weight: bold;
+  }
+  .bg-3 { 
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #000000;
+  }
+  .bg-4 { 
+    background-color: #2f2f2f; /* Black Gray */
+    color: #fff;
+  }
+  .container-fluid {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 0;
+    margin-top: 0;
+    font-size: 20px;
+    letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+@media screen {
+#printSection {
+display: none;
+}
+}
+
+@media print {
+  body * {
+    visibility:hidden;
+  }
+
+  html, body {
+  height:100%; 
+  margin: 0 !important; 
+  padding: 0 !important;
+  overflow: hidden;
+}
+  #printSection, #printSection * {
+    visibility:visible;
+  }
+  #printSection {
+    position:absolute;
+    left:0;
+    top:0;
+  }
+}
+    </style>
+</head>
+<body> 
+    <nav class="navbar navbar-inverse" style="background-color:rgb(0, 0, 0);font-weight: bolder;color: #ffffff;">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+            <span id="logo-img" ><img src="images/C.png" alt="LOGO" class="img-circle img-responsive"></span>
+            <a class="navbar-brand" href="#" style="font-size:23px;padding-top:32px;">APNA FOOD</a>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#Menu" style="font-size:18px;padding-top:32px;padding-bottom:36px;"><span class="glyphicon glyphicon-cutlery" style="color:grey;"></span>&nbsp;Menu&nbsp;<span class="glyphicon glyphicon-glass" style="color:grey;"></span></a></li>
+              <li><a href="#Bill_Generate" style="font-size:18px;padding-top:32px;padding-bottom:36px;"><span class="glyphicon glyphicon-list-alt" style="color:grey;"></span>&nbsp;Generate Bill</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="container-fluid bg-1 text-center">
+        <h1 class="margin">APNA FOOD</h1>
+        <img src="images/C.png" class="img-responsive img-circle margin" style="display:inline" alt="LOGO" width="350" height="350">
+        <h3>APNA FOOD - The Best Fast Food</h3>
+      </div>
+      
+      <div class="container-fluid bg-3 text-center" id="Menu" style="border:2px solid black; font-weight:bold ;background-image:linear-gradient(to right,rgb(234, 55, 55),rgb(240, 242, 111),rgb(234, 55, 55));padding-top: 100px;">    
+        <h2 class="margin" style="font-size:50px;">Menu</h2><br>
+        <div class="table-responsive">
+        <table class="table table-bordered" style="background-image:linear-gradient(to right, rgb(234, 55, 55),rgb(240, 242, 111),rgb(240, 242, 111),rgb(234, 55, 55),rgb(240, 242, 111),rgb(240, 242, 111),rgb(234, 55, 55));font-size: 5px;font-weight: bold;border: 8px double black;">
+          <tr style="border: 5px double black;">
+          <td class="col-sm-4" style="border: 5px double black;">
+              <img src="images/colddrink.png" class="img-responsive margin" style="width:100%;height: 325px;" alt="Image">
+              <h3>Chill your Mind with Coca-Cola</h3>
+              <table style="margin-left: auto;margin-right: auto;">
+              <tr>
+              <td>
+              <button id="minus1" class="btn btn-lg btn-danger" style="border-radius:50%;">-</button>&emsp;</td>
+              <td><input type="number" id="it1" style="height:30px;font-size:25px;width:60px;" min="0" value="0">&emsp;</td>
+              <td><button id="plus1" class="btn btn-lg btn-success" style="border-radius:50%;">+</button></td>
+              </tr>
+              </table>
+          </td>
+          <td class="col-sm-4" style="border: 5px double black;"> 
+              <img src="images/Burger.jpg" class="img-responsive margin" style="width:100%;height: 325px;" alt="Image">
+              <h3>Yummy Cheesy Burger</h3>
+              <table style="margin-left: auto;margin-right: auto;">
+                <tr>
+                <td>
+                <button id="minus2" class="btn btn-lg btn-danger" style="border-radius:50%;">-</button>&emsp;</td>
+                <td><input type="number" id="it2" style="height:30px;font-size:25px;width:60px;" min="0" value="0">&emsp;</td>
+                <td><button id="plus2" class="btn btn-lg btn-success" style="border-radius:50%;">+</button></td>
+                </tr>
+                </table>
+          </td>
+          <td class="col-sm-4" style="border: 5px double black;"> 
+              <img src="images/pizza.jpg" class="img-responsive margin" style="width:100%;height: 325px;" alt="Image">
+              <h3>Margarita Pizza's</h3>
+              <table style="margin-left: auto;margin-right: auto;">
+                <tr>
+                <td>
+                <button id="minus3" class="btn btn-lg btn-danger" style="border-radius:50%;">-</button>&emsp;</td>
+                <td><input type="number" id="it3" style="height:30px;font-size:25px;width:60px;" min="0" value="0">&emsp;</td>
+                <td><button id="plus3" class="btn btn-lg btn-success" style="border-radius:50%;">+</button></td>
+                </tr>
+                </table>
+          </td>
+        </tr>
+        <tr style="border: 5px double black;">
+          <td class="col-sm-4" style="border: 5px double black;">
+            <img src="images/sprite.jpg" class="img-responsive margin" style="width:100%;height: 325px;" alt="Image">
+            <h3>Refresh Your Mood with Sprite</h3>
+            <table style="margin-left: auto;margin-right: auto;">
+              <tr>
+              <td>
+              <button id="minus4" class="btn btn-lg btn-danger" style="border-radius:50%;">-</button>&emsp;</td>
+              <td><input type="number" id="it4" style="height:30px;font-size:25px;width:60px;" min="0" value="0">&emsp;</td>
+              <td><button id="plus4" class="btn btn-lg btn-success" style="border-radius:50%;">+</button></td>
+              </tr>
+              </table>
+          </td>
+          <td class="col-sm-4" style="border: 5px double black;"> 
+            <img src="images/dosa.jpg" class="img-responsive margin" style="width:100%;height: 325px;" alt="Image">
+            <h3>Super SouthIndian Dosa</h3>
+            <table style="margin-left: auto;margin-right: auto;">
+              <tr>
+              <td>
+              <button id="minus5" class="btn btn-lg btn-danger" style="border-radius:50%;">-</button>&emsp;</td>
+              <td><input type="number" id="it5" style="height:30px;font-size:25px;width:60px;" min="0" value="0">&emsp;</td>
+              <td><button id="plus5" class="btn btn-lg btn-success" style="border-radius:50%;">+</button></td>
+              </tr>
+              </table>
+          </td>
+          <td class="col-sm-4" style="border: 5px double black;"> 
+            <img src="images/itilianpizza.jpg" class="img-responsive margin" style="width:100%;height: 325px;" alt="Image">
+            <h3>Exotic Itilian Pizza</h3>
+            <table style="margin-left: auto;margin-right: auto;">
+              <tr>
+              <td>
+              <button id="minus6" class="btn btn-lg btn-danger" style="border-radius:50%;">-</button>&emsp;</td>
+              <td><input type="number" id="it6" style="height:30px;font-size:25px;width:60px;" min="0" value="0">&emsp;</td>
+              <td><button id="plus6" class="btn btn-lg btn-success" style="border-radius:50%;">+</button></td>
+              </tr>
+              </table>
+          </td>
+      </tr>
+      <tr style="border: 5px double black;">
+          <td class="col-sm-4" style="border: 5px double black;">
+            <img src="images/frenchfries.jpg" class="img-responsive margin" style="width:100%;height: 325px;" alt="Image">
+            <h3>Cripsy French-Fries</h3>
+            <table style="margin-left: auto;margin-right: auto;">
+              <tr>
+              <td>
+              <button id="minus7" class="btn btn-lg btn-danger" style="border-radius:50%;">-</button>&emsp;</td>
+              <td><input type="number" id="it7" style="height:30px;font-size:25px;width:60px;" min="0" value="0">&emsp;</td>
+              <td><button id="plus7" class="btn btn-lg btn-success" style="border-radius:50%;">+</button></td>
+              </tr>
+              </table>
+          </td>
+          <td class="col-sm-4" style="border: 5px double black;"> 
+            <img src="images/water.jpg" class="img-responsive margin" style="width:100%;height: 325px;" alt="Image">
+            <h3>Water Bottle</h3>
+            <table style="margin-left: auto;margin-right: auto;">
+              <tr>
+              <td>
+              <button id="minus8" class="btn btn-lg btn-danger" style="border-radius:50%;">-</button>&emsp;</td>
+              <td><input type="number" id="it8" style="height:30px;font-size:25px;width:60px;" min="0" value="0">&emsp;</td>
+              <td><button id="plus8" class="btn btn-lg btn-success" style="border-radius:50%;">+</button></td>
+              </tr>
+              </table>
+          </td>
+          <td class="col-sm-4" style="border: 5px double black;"> 
+            <img src="images/smokedburrger.jpg" class="img-responsive margin" style="width:100%;height: 325px;" alt="Image">
+            <h3>Smoked Burger</h3>
+            <table style="margin-left: auto;margin-right: auto;">
+              <tr>
+              <td>
+              <button id="minus9" class="btn btn-lg btn-danger" style="border-radius:50%;">-</button>&emsp;</td>
+              <td><input type="number" id="it9" style="height:30px;font-size:25px;width:60px;" min="0" value="0">&emsp;</td>
+              <td><button id="plus9" class="btn btn-lg btn-success" style="border-radius:50%;">+</button></td>
+              </tr>
+              </table>
+          </td>
+      </tr>
+    </table>
+      </div>
+    </div>
+
+      <div class="container-fluid bg-2 text-center" id="Bill_Generate">
+        <h3 class="margin" style="padding-top:20px;font-weight: bold;font-size:30px;">GST-Bill</h3>
+        <p style="font-size:30px;">You can Generate Bill by pressing this Button</p>
+        <div class="wrap">
+        <button type="button" class="btn btn-lg btn-success" id="openmodal" style="color:#ffffff;font-weight: bold;">
+          Make Bill
+        </button>&emsp;
+        <button type="button" class="btn btn-lg" id="searchmodal" style="background-color:#ff0000;color:#ffffff;font-weight: bold;">
+          See previous Data
+        </button>
+      </div>
+      </div>
+
+      <footer class="container-fluid bg-4 text-center">
+        <div class="row">
+          <section class="col-sm-6">
+            <h3>Monday-Sunday<br>
+            Hours: 10:00 am - 10:00 pm<br>
+          </h3>
+            <hr class="visible-xs">
+          </section>
+          <section id="address" class="col-sm-6">
+            <h3>Address:<br>
+            Kholvad Gam,Nr. Kamrej Char rasta Surat<br>
+          </h3>
+            <hr class="visible-xs">
+          </section>
+        </div><br>
+        <div><span class="glyphicon glyphicon-copyright-mark"></span>Team Debugger</div> 
+      </footer>
+
+
+
+<div id="MyModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      
+      <!-- Modal Header -->
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="gridSystemModalLabel">GST-Bill</h4>
+      </div>
+      <div id="printThis">
+      <div style="border: 2px dashed black;">
+      <!-- Modal Body -->  
+      <div class="modal-body">
+        <div class="body-message">
+          <div class="centertext"><h2 class="modal-title" style="text-align: center;">GST-Bill</h2></div>
+          <div style="margin-top:3px;">
+            <label><b>Customer Name:</b></label>
+            <input type="text" id="customername" placeholder="Customer Name" size="21" value="" required>
+            <hr class="visible-xs" style="height: 1.5px;background-color: black;">
+          </div>
+          <div>
+            <label><b>Bill Number :</b></label>&emsp;&emsp;
+            <input type="number" id="billnumber" placeholder="Bill Number" min="1" value="" style="width:256.5px;" required readonly>
+            <hr class="visible-xs" style="height: 1.5px;background-color: black;">
+          </div> 
+          <div class="cointanier-fluid">
+            <div class="mt-3">
+              <div class="table-responsive">
+              <table class="table table-bordered table-striped" style="margin-top: 25px">
+                <thead>
+                  <tr>
+                    <th class="col-sm-2">Items</th>
+                    <th class="col-sm-2">HSN Code</th>
+                    <th class="col-sm-2">Price</th>
+                    <th class="col-sm-2">Quantity</th>
+                    <th class="col-sm-1">GST Rate</th>
+                    <th class="col-sm-3">Total<span style="color:rgb(175, 162, 162);font-size: small;">(Without GST)</span></th>
+                  </tr>	
+                </thead>
+                <tbody class="tblbody" id="print">
+                </tbody>
+              </table>
+            </div>
+              <span style="margin-top:5px; font-weight: bolder; text-align: center; ">Payable Amount is </span><span id="grandtotal"></span><span style="color:rgb(78, 75, 75);font-size: small;">(With GST)</span>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+      <button class="btn btn-danger btn-lg" data-dismiss="modal" aria-hidden="true" style="float:left;border:1px solid black;">Close</button>
+      <button id="btnPrint" type="button" class="btn btn-success btn-lg" style="border:1px solid black;"><span class="glyphicon glyphicon-print" style="color:rgb(255, 255, 255);"></span>&nbsp;Print</button>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <div id="smodal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="sgridSystemModalLabel">GST-Bill</h4>
+        </div>
+        <div id="printThisold">
+        <div style="border: 2px dashed black;">
+        <!-- Modal Body -->  
+        <div class="modal-body">
+          <div class="body-message">
+            <div class="centertext"><h2 class="modal-title" style="text-align: center;">GST-Bill</h2></div>
+            <div style="margin-top:3px;">
+              <label><b>Customer Name:</b></label>
+              <input type="text" id="scustomername" placeholder="Customer Name" size="21" value="" required readonly disabled>
+              <hr class="visible-xs" style="height: 1.5px;background-color: black;">
+            </div>
+            <div>
+              <label><b>Bill Number :</b></label>&emsp;&emsp;
+              <input type="number" id="billsearchnumber" placeholder="Bill Number" min="1" style="width:256.5px;" value="" required>
+              <hr class="visible-xs" style="height: 1.5px;background-color: black;">
+            </div> 
+            <div class="cointanier-fluid">
+              <div class="mt-3">
+                <div class="table-responsive">
+                <table class="table table-bordered table-striped" style="margin-top: 25px">
+                  <thead>
+                    <tr>
+                      <th class="col-sm-2">Items</th>
+                      <th class="col-sm-2">HSN Code</th>
+                      <th class="col-sm-2">Price</th>
+                      <th class="col-sm-2">Quantity</th>
+                      <th class="col-sm-1">GST Rate</th>
+                      <th class="col-sm-3">Total<span style="color:rgb(175, 162, 162);font-size: small;">(Without GST)</span></th>
+                    </tr>	
+                  </thead>
+                  <tbody class="tblbody" id="sprint">
+                  </tbody>
+                </table>
+              </div>
+                <span style="margin-top:5px; font-weight: bolder; text-align: center; ">Payable Amount is </span><span id="sgrandtotal"></span><span style="color:rgb(78, 75, 75);font-size: small;">(With GST)</span>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+        <button class="btn btn-danger btn-lg" data-dismiss="modal" aria-hidden="true" style="float:left;border:1px solid black;">Close</button>
+        <button class="btn btn-primary btn-lg" id="find">Find</button>
+        <!-- <button id="btnPrint" type="button" class="btn btn-success btn-lg" style="border:1px solid black;"><span class="glyphicon glyphicon-print" style="color:rgb(255, 255, 255);"></span>&nbsp;Find</button> -->
+        </div>
+      </div>
+      </div>
+    </div>
+    <script type="module">
+
+$("#plus1").click(function(){
+  var inc = document.getElementById("it1").value;
+  inc++;
+  document.getElementById("it1").value = inc;
+});
+
+$("#minus1").click(function(){
+  var dec = document.getElementById("it1").value;
+  dec--;
+  if(dec>=0){
+  document.getElementById("it1").value = dec;
+  }
+  else
+  {
+    dec = 0;
+    document.getElementById("it1").value = dec;
+  }
+});
+
+$("#plus2").click(function(){
+  var inc = document.getElementById("it2").value;
+  inc++;
+  document.getElementById("it2").value = inc;
+});
+
+$("#minus2").click(function(){
+  var dec = document.getElementById("it2").value;
+  dec--;
+  if(dec>=0){
+  document.getElementById("it2").value = dec;
+  }
+  else
+  {
+    dec = 0;
+    document.getElementById("it2").value = dec;
+  }
+});
+
+$("#plus3").click(function(){
+  var inc = document.getElementById("it3").value;
+  inc++;
+  document.getElementById("it3").value = inc;
+});
+
+$("#minus3").click(function(){
+  var dec = document.getElementById("it3").value;
+  dec--;
+  if(dec>=0){
+  document.getElementById("it3").value = dec;
+  }
+  else
+  {
+    dec = 0;
+    document.getElementById("it3").value = dec;
+  }
+});
+
+$("#plus4").click(function(){
+  var inc = document.getElementById("it4").value;
+  inc++;
+  document.getElementById("it4").value = inc;
+});
+
+$("#minus4").click(function(){
+  var dec = document.getElementById("it4").value;
+  dec--;
+  if(dec>=0){
+  document.getElementById("it4").value = dec;
+  }
+  else
+  {
+    dec = 0;
+    document.getElementById("it4").value = dec;
+  }
+});
+
+$("#plus5").click(function(){
+  var inc = document.getElementById("it5").value;
+  inc++;
+  document.getElementById("it5").value = inc;
+});
+
+$("#minus5").click(function(){
+  var dec = document.getElementById("it5").value;
+  dec--;
+  if(dec>=0){
+  document.getElementById("it5").value = dec;
+  }
+  else
+  {
+    dec = 0;
+    document.getElementById("it5").value = dec;
+  }
+});
+
+$("#plus6").click(function(){
+  var inc = document.getElementById("it6").value;
+  inc++;
+  document.getElementById("it6").value = inc;
+});
+
+$("#minus6").click(function(){
+  var dec = document.getElementById("it6").value;
+  dec--;
+  if(dec>=0){
+  document.getElementById("it6").value = dec;
+  }
+  else
+  {
+    dec = 0;
+    document.getElementById("it6").value = dec;
+  }
+});
+
+$("#plus7").click(function(){
+  var inc = document.getElementById("it7").value;
+  inc++;
+  document.getElementById("it7").value = inc;
+});
+
+$("#minus7").click(function(){
+  var dec = document.getElementById("it7").value;
+  dec--;
+  if(dec>=0){
+  document.getElementById("it7").value = dec;
+  }
+  else
+  {
+    dec = 0;
+    document.getElementById("it7").value = dec;
+  }
+});
+
+$("#plus8").click(function(){
+  var inc = document.getElementById("it8").value;
+  inc++;
+  document.getElementById("it8").value = inc;
+});
+
+$("#minus8").click(function(){
+  var dec = document.getElementById("it8").value;
+  dec--;
+  if(dec>=0){
+  document.getElementById("it8").value = dec;
+  }
+  else
+  {
+    dec = 0;
+    document.getElementById("it8").value = dec;
+  }
+});
+
+$("#plus9").click(function(){
+  var inc = document.getElementById("it9").value;
+  inc++;
+  document.getElementById("it9").value = inc;
+});
+
+$("#minus9").click(function(){
+  var dec = document.getElementById("it9").value;
+  dec--;
+  if(dec>=0){
+  document.getElementById("it9").value = dec;
+  }
+  else
+  {
+    dec = 0;
+    document.getElementById("it9").value = dec;
+  }
+});
+
+var i = 1;
+
+$(document).ready(function() {
+const dbin = ref(db);
+        get(child(dbin,"NUMBERS/")).then((snapshot)=>{
+          if(snapshot.exists()){
+            billnumber.value = snapshot.val().INVOICE;
+            i = document.getElementById("billnumber").value;
+            i++;
+            document.getElementById("billnumber").value = i;
+            console.log(i);
+            alert("Now you can Generate Bill or can see Previous Bills");
+          }
+        });
+});
+
+var iii = document.getElementById("billnumber").value;
+console.log(iii);
+
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-analytics.js";
+      import { getDatabase, ref, set, get, child, update, remove, onValue } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-database.js";
+
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyC-59PvdGh3BIjuQi0t4xyq_Og7CS_W3gg",
+        authDomain: "devheat2022.firebaseapp.com",
+        databaseURL: "https://devheat2022-default-rtdb.firebaseio.com",
+        projectId: "devheat2022",
+        storageBucket: "devheat2022.appspot.com",
+        messagingSenderId: "194717846327",
+        appId: "1:194717846327:web:a5c8467b2c57c7e398e8b2",
+        measurementId: "G-30VP87WX5C"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const db = getDatabase()
+      
+      var nameV, billV, dataV,amountV;
+
+      
+      // document.getElementById("insert").onclick = 
+        function insertingdata(){
+        nameV = document.getElementById("customername").value;
+        billV = document.getElementById("billnumber").value;
+        dataV = document.getElementById("print").outerHTML;
+        amountV = document.getElementById("grandtotal").outerHTML;
+          set(ref(db,"Bills/" + billV) ,{
+            name: nameV,
+            billNum: billV,
+            data: dataV,
+            billamount: amountV,
+          }).then(()=>{
+            alert("data stored")
+          })
+          var lastvalue = billV;
+          set(ref(db,"NUMBERS/"),{
+            INVOICE: lastvalue
+          })
+      }
+
+      document.getElementById("find").onclick = function(){
+       var billcheck = document.getElementById("billsearchnumber").value;
+        const dbref = ref(db);
+        get(child(dbref,"Bills/" + billcheck)).then((snapshot)=>{
+          if(snapshot.exists()){
+            scustomername.value = snapshot.val().name;
+            sprint.innerHTML = snapshot.val().data;
+            sgrandtotal.innerHTML = snapshot.val().billamount;
+          }
+          else{
+            scustomername.value = "";
+            sprint.innerHTML = "";
+            sgrandtotal.innerHTML = "";
+            alert("No data found");
+          }
+        })
+        .catch((error)=>{
+          alert("UnsuccessFul , error" + error);
+        });
+      }
+
+      function load() {
+        
+      }
+      
+      function billing()
+        {
+          var check=false;
+          var value = "";
+          var nettotal = 0;
+          var grandtotal = 0;
+          var HSNC = 2202;
+          var HSNF = 3004;
+          var GSTR = 18;
+          
+          
+          var che = document.getElementById("it1").value;
+          if(che != 0)
+          {
+              check = true;
+              var price = 50;
+              var total = (price*che);
+              value += '<tr><td>Coca-Cola</td><td>'+HSNC+'</td><td>'+price+'</td><td>'+che+'</td><td>'+GSTR+'</td><td>'+total+'</td></tr>';
+              nettotal += total;
+          }
+    
+          var che = document.getElementById("it2").value;
+          if(che != 0)
+          {
+              check = true;
+              var price = 40;
+              var total = (price*che);
+              value += '<tr><td>Burger</td><td>'+HSNF+'</td><td>'+price+'</td><td>'+che+'</td><td>'+GSTR+'</td><td>'+total+'</td></tr>';
+              nettotal += total;
+          }
+    
+          var che = document.getElementById("it3").value;
+          if(che != 0)
+          {
+              check = true;
+              var price = 90;
+              var total = (price*che);
+              value += '<tr><td>Veg.Pizza</td><td>'+HSNF+'</td><td>'+price+'</td><td>'+che+'</td><td>'+GSTR+'</td><td>'+total+'</td></tr>';
+              nettotal += total;
+          }
+    
+          var che = document.getElementById("it4").value;
+          if(che != 0)
+          {
+              check = true;
+              var price = 55;
+              var total = (price*che);
+              value += '<tr><td>Sprite</td><td>'+HSNC+'</td><td>'+price+'</td><td>'+che+'</td><td>'+GSTR+'</td><td>'+total+'</td></tr>';
+              nettotal += total;
+          }
+    
+          var che = document.getElementById("it5").value;
+          if(che != 0)
+          {
+              check = true;
+              var price = 65;
+              var total = (price*che);
+              value += '<tr><td>Masala Dosa</td><td>'+HSNF+'</td><td>'+price+'</td><td>'+che+'</td><td>'+GSTR+'</td><td>'+total+'</td></tr>';
+              nettotal += total;
+          }
+    
+          var che = document.getElementById("it6").value;
+          if(che != 0)
+          {
+              check = true;
+              var price = 120;
+              var total = (price*che);
+              value += '<tr><td>Itilian Pizza</td><td>'+HSNF+'</td><td>'+price+'</td><td>'+che+'</td><td>'+GSTR+'</td><td>'+total+'</td></tr>';
+              nettotal += total;
+          }
+    
+          var che = document.getElementById("it7").value;
+          if(che != 0)
+          {
+              check = true;
+              var price = 50;
+              var total = (price*che);
+              value += '<tr><td>French Fries</td><td>'+HSNF+'</td><td>'+price+'</td><td>'+che+'</td><td>'+GSTR+'</td><td>'+total+'</td></tr>';
+              nettotal += total;
+          }
+    
+          var che = document.getElementById("it8").value;
+          if(che != 0)
+          {
+              check = true;
+              var price = 25;
+              var total = (price*che);
+              value += '<tr><td>Water Bottle</td><td>'+HSNC+'</td><td>'+price+'</td><td>'+che+'</td><td>'+GSTR+'</td><td>'+total+'</td></tr>';
+              nettotal += total;
+          }
+    
+          var che = document.getElementById("it9").value;
+          if(che != 0)
+          {
+              check = true;
+              var price = 60;
+              var total = (price*che);
+              value += '<tr><td>Smoked Burger</td><td>'+HSNF+'</td><td>'+price+'</td><td>'+che+'</td><td>'+GSTR+'</td><td>'+total+'</td></tr>';
+              nettotal += total;
+          }
+          nettotal += nettotal*(0.18);
+          document.getElementById("grandtotal").innerHTML = nettotal;
+    
+          if(!check)
+          {
+            alert("No Item Selected");
+            return check;
+          }
+          else
+          {
+              document.getElementById("print").innerHTML = value;
+          }
+        }
+        
+    
+        $(document).ready(function(){
+        $("#searchmodal").click(function(){
+          $("#smodal").modal("show");
+        });
+      });
+    
+        $(document).ready(function(){
+        $("#openmodal").click(function(){
+          $("#MyModal").modal("show");
+        });
+        $("#MyModal").on('shown.bs.modal', function(){
+          load();
+          var viral = billing();
+          if(viral == false)
+          {$("#MyModal").modal("hide");}
+        });
+      });
+    
+    
+          document.getElementById("btnPrint").onclick = function () {
+            var name = document.getElementById("customername").value;
+            if(name.length <= 3)
+            {
+              alert("Please Enter Customer Name"); 
+            }
+            else if(document.getElementById("billnumber").value=="")
+            {
+              alert("Please Enter Bill Number");
+            }
+            else
+            {
+              printElement(document.getElementById("printThis"));
+            }
+      }
+    
+      function clearvalue(){
+        i++;
+        document.getElementById("it1").value = 0;
+        document.getElementById("it2").value = 0;
+        document.getElementById("it3").value = 0;
+        document.getElementById("it4").value = 0;
+        document.getElementById("it5").value = 0;
+        document.getElementById("it6").value = 0; 
+        document.getElementById("it7").value = 0;
+        document.getElementById("it8").value = 0;
+        document.getElementById("it9").value = 0;
+        document.getElementById("print").innerHTML = "";
+        document.getElementById("customername").value = "";
+        document.getElementById("grandtotal").innerHTML = "";
+        document.getElementById("billnumber").value = i;    
+      }
+    
+      function printElement(elem) {
+          var domClone = elem.cloneNode(true);
+          
+          var $printSection = document.getElementById("printSection");
+          
+          if (!$printSection) {
+              var $printSection = document.createElement("div");
+              $printSection.id = "printSection";
+              document.body.appendChild($printSection);
+          }
+          
+          $printSection.innerHTML = " ";
+          $printSection.appendChild(domClone);
+          insertingdata();
+          $("#MyModal").modal("hide");
+          window.print();
+          clearvalue();
+      }
+      </script>
+</body>
+</html>
