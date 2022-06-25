@@ -21,7 +21,7 @@
 
 
         Working
-1. while opening webiste for first time or after refreshing webiste,Please wait for the pop up "Now you  can Generate Bill or can see Previous Bills".After pop-up appers click ok and procced for next step.
+1. While opening webiste for first time or after refreshing webiste,Please wait for the pop up "Now you can Generate Bill or can see Previous Bills" because it takes few seconds to sink the data from database.After pop-up appers click ok and procced for next step.
 2. User can navigate to the Menu via scrolling or by simply clicking on "Menu" Button from navigation Bar
 3. There is "+" button and "-" button below the very food item from where quantity of respective Food can be increase and decrease and also User can add quantity manually by entering the value in Number Box.
 4. After adding food-items , simply click on the "Make Bill" Button which can be find via scrolling down the website or by simply clicking on "Generate Bill" button from navigation Bar.
