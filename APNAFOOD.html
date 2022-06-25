@@ -26,7 +26,6 @@ from {top:-300px; opacity:0}
 to {top:0; opacity:1}
 }
 
-/* The Close Button */
 .close {
 padding-top: 1.1%;
 padding-bottom: 1.1%;
@@ -83,11 +82,11 @@ color: black;
   .bg-1 {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin-top: 40px; 
-    background-image:linear-gradient(to right,#12836c,#2ce0bc,#12836c); /* Green */
+    background-image:linear-gradient(to right,#12836c,#2ce0bc,#12836c); 
     color: #000000;
   }
   .bg-2 { 
-    background-image: linear-gradient(to right,rgb(30, 30, 222),rgb(130, 130, 235),rgb(130, 130, 235),rgb(30, 30, 222)); /* Dark Blue */
+    background-image: linear-gradient(to right,rgb(30, 30, 222),rgb(130, 130, 235),rgb(130, 130, 235),rgb(30, 30, 222));
     color: #000000;
     font-weight: bold;
   }
@@ -96,7 +95,7 @@ color: black;
     color: #000000;
   }
   .bg-4 { 
-    background-color: #2f2f2f; /* Black Gray */
+    background-color: #2f2f2f;
     color: #fff;
   }
   .container-fluid {
@@ -340,14 +339,12 @@ display: none;
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       
-      <!-- Modal Header -->
       <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="gridSystemModalLabel">GST-Bill</h4>
       </div>
       <div id="printThis">
       <div style="border: 2px dashed black;">
-      <!-- Modal Body -->  
       <div class="modal-body">
         <div class="body-message">
           <div class="centertext"><h2 class="modal-title" style="text-align: center;">GST-Bill</h2></div>
@@ -399,14 +396,12 @@ display: none;
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         
-        <!-- Modal Header -->
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="sgridSystemModalLabel">GST-Bill</h4>
         </div>
         <div id="printThisold">
         <div style="border: 2px dashed black;">
-        <!-- Modal Body -->  
         <div class="modal-body">
           <div class="body-message">
             <div class="centertext"><h2 class="modal-title" style="text-align: center;">GST-Bill</h2></div>
@@ -448,7 +443,6 @@ display: none;
         <div class="modal-footer">
         <button class="btn btn-danger btn-lg" data-dismiss="modal" aria-hidden="true" style="float:left;border:1px solid black;">Close</button>
         <button class="btn btn-primary btn-lg" id="find">Find</button>
-        <!-- <button id="btnPrint" type="button" class="btn btn-success btn-lg" style="border:1px solid black;"><span class="glyphicon glyphicon-print" style="color:rgb(255, 255, 255);"></span>&nbsp;Find</button> -->
         </div>
       </div>
       </div>
@@ -636,25 +630,16 @@ const dbin = ref(db);
             i = document.getElementById("billnumber").value;
             i++;
             document.getElementById("billnumber").value = i;
-            console.log(i);
             alert("Now you can Generate Bill or can see Previous Bills");
           }
         });
 });
 
-var iii = document.getElementById("billnumber").value;
-console.log(iii);
 
-      // Import the functions you need from the SDKs you need
       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
       import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-analytics.js";
       import { getDatabase, ref, set, get, child, update, remove, onValue } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-database.js";
 
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
-    
-      // Your web app's Firebase configuration
-      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
       const firebaseConfig = {
         apiKey: "AIzaSyC-59PvdGh3BIjuQi0t4xyq_Og7CS_W3gg",
         authDomain: "devheat2022.firebaseapp.com",
@@ -666,15 +651,12 @@ console.log(iii);
         measurementId: "G-30VP87WX5C"
       };
     
-      // Initialize Firebase
       const app = initializeApp(firebaseConfig);
       const analytics = getAnalytics(app);
       const db = getDatabase()
       
       var nameV, billV, dataV,amountV;
 
-      
-      // document.getElementById("insert").onclick = 
         function insertingdata(){
         nameV = document.getElementById("customername").value;
         billV = document.getElementById("billnumber").value;
