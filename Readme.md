@@ -15,6 +15,8 @@
    icon on clicking that icon a list with two button will open with two button 1."Menu" 
     2."Generate bill" ,where by clicking on button ,user will be navigate to repective section.
 10. It is User-freindly website with attractive colours and Interfaces. 
+11. While travelling at any page of website if user want to travel at top of page ,user can simply 
+    click on the "APNA FOOD" in Navigation Bar.
                         Working of website is given below. 
 
 
