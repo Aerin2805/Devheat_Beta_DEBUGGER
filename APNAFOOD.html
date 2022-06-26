@@ -7,7 +7,7 @@
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Apna Food GST-Bill Generator</title>
+    <title>Billing try</title>
     <style>
 .wrap{
   color: #000;
@@ -33,6 +33,10 @@ color: rgb(0, 0, 0);
 float: right;
 font-size: 28px;
 font-weight: bold;
+}
+
+#insidejs {
+    background-color: red;
 }
 
 .close:hover,
@@ -376,14 +380,17 @@ display: none;
                 </tbody>
               </table>
             </div>
-              <span style="margin-top:5px; font-weight: bolder; text-align: center; ">Payable Amount is </span><span id="grandtotal"></span><span style="color:rgb(78, 75, 75);font-size: small;">(With GST)</span>
+              <span style="font-weight: bolder; text-align: center; ">Payable Amount is </span><span id="grandtotal"></span><span style="color:rgb(78, 75, 75);font-size: small;">(With GST)</span><br>
             </div>
             </div>
           </div>
+          Divide Bill in&nbsp;<input type="number" value="0" min="1" id="totalperson" style="width:50px;height:40px;">&nbsp;Person&emsp;&emsp;&emsp;
+          <!-- <button class="btn btn-primary btn-lg" id="splitbill">Spilt-Bill</button><br> -->
+          <h4 id="PERPERSONBILL" style="font-weight:Bold;"></h4>
         </div>
       </div>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" >
       <button class="btn btn-danger btn-lg" data-dismiss="modal" aria-hidden="true" style="float:left;border:1px solid black;">Close</button>
       <button id="btnPrint" type="button" class="btn btn-success btn-lg" style="border:1px solid black;"><span class="glyphicon glyphicon-print" style="color:rgb(255, 255, 255);"></span>&nbsp;Print</button>
       </div>
@@ -435,6 +442,7 @@ display: none;
               </div>
                 <span style="margin-top:5px; font-weight: bolder; text-align: center; ">Payable Amount is </span><span id="sgrandtotal"></span><span style="color:rgb(78, 75, 75);font-size: small;">(With GST)</span>
               </div>
+                <p id="sPERPERSONBILL"></p>
               </div>
             </div>
           </div>
@@ -448,7 +456,7 @@ display: none;
       </div>
     </div>
     <script type="module">
-
+var checksplit = false;
 $("#plus1").click(function(){
   var inc = document.getElementById("it1").value;
   inc++;
@@ -655,18 +663,20 @@ const dbin = ref(db);
       const analytics = getAnalytics(app);
       const db = getDatabase()
       
-      var nameV, billV, dataV,amountV;
+      var nameV, billV, dataV,amountV,perpersonV;
 
         function insertingdata(){
         nameV = document.getElementById("customername").value;
         billV = document.getElementById("billnumber").value;
         dataV = document.getElementById("print").outerHTML;
         amountV = document.getElementById("grandtotal").outerHTML;
+        perpersonV = document.getElementById("PERPERSONBILL").outerHTML;
           set(ref(db,"Bills/" + billV) ,{
             name: nameV,
             billNum: billV,
             data: dataV,
             billamount: amountV,
+            perpersonamount: perpersonV
           }).then(()=>{
             alert("data stored")
           })
@@ -684,11 +694,14 @@ const dbin = ref(db);
             scustomername.value = snapshot.val().name;
             sprint.innerHTML = snapshot.val().data;
             sgrandtotal.innerHTML = snapshot.val().billamount;
+            sPERPERSONBILL.innerHTML = snapshot.val().perpersonamount;
           }
           else{
+            billsearchnumber.value = "";
             scustomername.value = "";
             sprint.innerHTML = "";
             sgrandtotal.innerHTML = "";
+            sPERPERSONBILL.innerHTML ="";
             alert("No data found");
           }
         })
@@ -827,6 +840,7 @@ const dbin = ref(db);
           $("#MyModal").modal("show");
         });
         $("#MyModal").on('shown.bs.modal', function(){
+          checksplit = false;
           load();
           var viral = billing();
           if(viral == false)
@@ -836,6 +850,23 @@ const dbin = ref(db);
     
     
           document.getElementById("btnPrint").onclick = function () {
+            var menuperson= document.getElementById("totalperson").value;
+            if(menuperson == 0)
+             {
+              alert("Bill should be divived with minimum of 1 person");
+              return;
+             }  
+            if(checksplit == false)
+            {
+              var tbl = document.getElementById("grandtotal").innerHTML;
+              var tper = document.getElementById("totalperson").value;
+              var perperson = (tbl/tper);
+              perperson = parseFloat(perperson).toFixed(2)
+              document.getElementById("PERPERSONBILL").innerHTML = "This bill is divided into "+ tper +" person and per person has to pay Rs. "+perperson ;
+            alert("Your Split data might have been Change please check one Time");
+            checksplit = true;
+            return;
+             }
             var name = document.getElementById("customername").value;
             if(name.length <= 3)
             {
@@ -865,7 +896,9 @@ const dbin = ref(db);
         document.getElementById("print").innerHTML = "";
         document.getElementById("customername").value = "";
         document.getElementById("grandtotal").innerHTML = "";
-        document.getElementById("billnumber").value = i;    
+        document.getElementById("billnumber").value = i;
+        document.getElementById("PERPERSONBILL").innerHTML = "";  
+        document.getElementById("totalperson").value = 1;
       }
     
       function printElement(elem) {
@@ -878,7 +911,7 @@ const dbin = ref(db);
               $printSection.id = "printSection";
               document.body.appendChild($printSection);
           }
-          
+          checksplit = false;
           $printSection.innerHTML = " ";
           $printSection.appendChild(domClone);
           insertingdata();
@@ -886,6 +919,26 @@ const dbin = ref(db);
           window.print();
           clearvalue();
       }
+
+
+      $("#splitbill").click(function(){
+      checksplit = true;
+      var tbl = document.getElementById("grandtotal").innerHTML;
+      var tper = document.getElementById("totalperson").value;
+      var perperson = (tbl/tper);
+      perperson = parseFloat(perperson).toFixed(2)
+      document.getElementById("PERPERSONBILL").innerHTML = "This bill is divided into "+ tper +" person and per person has to pay Rs. "+perperson ;
+    })
+
+    document.getElementById('totalperson').addEventListener('change', function() {
+      var tbl = document.getElementById("grandtotal").innerHTML;
+      var tper = document.getElementById("totalperson").value;
+      var perperson = (tbl/tper);
+      perperson = parseFloat(perperson).toFixed(2)
+      document.getElementById("PERPERSONBILL").innerHTML = "This bill is divided into "+ tper +" person and per person has to pay Rs. "+perperson ;
+      checksplit = false;
+    });
+  
       </script>
 </body>
 </html>
