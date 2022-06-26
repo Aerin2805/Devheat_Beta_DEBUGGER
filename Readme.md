@@ -31,3 +31,5 @@
 6. After entering the customer name thier is a quantity box where user can change the number of person 
     for spliting Bill.
 7. For viewing Previous bills , User have to click "See previous Data" where user will ask to enter the Bill number of Bill which user want to see.User can close modal with "close" button or "cross" mark or "clicking outside modal".
+8. our project Video link : https://drive.google.com/file/d/1six3btMAtXK0pNpSdYQOpEMP1MJhsVCs/view?usp=sharing
+9. and project link https://aerin2805.github.io/Devheat_Beta_DEBUGGER/APNAFOOD.html
